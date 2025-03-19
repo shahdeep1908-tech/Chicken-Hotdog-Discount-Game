@@ -1,0 +1,79 @@
+#intro-screen {
+  background-image: none;
+  transition: background-size 1s ease, background-image 0.5s ease;
+}
+
+.character-selection {
+  display: flex;
+  justify-content: space-around;
+  max-width: 600px;
+}
+
+.character {
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  max-width: 153px;
+  max-height: 387px;
+  position: relative;
+  z-index: 5;
+  pointer-events: auto;
+  border: 3px solid rgba(251, 227, 13, 0);
+  border-radius: 10px;
+}
+
+.character:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.05);
+  border-radius: 10px;
+}
+
+.character.selected {
+  background-color: rgba(255, 235, 18, 0.35);
+  border: 3px solid #FBE30D;
+  border-radius: 10px;
+}
+
+.character-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 15%;
+}
+
+#start-game {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  margin-bottom: 30px;
+  transition: opacity 0.3s;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+#start-game:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+#start-game:not(:disabled):hover {
+  opacity: 1;
+}
+
+#start-game img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+#discount{
+  font-family: 'Gamer Studio';
+  color: #FBE30D;
+}

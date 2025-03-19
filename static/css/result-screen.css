@@ -1,0 +1,206 @@
+#results-screen {
+  background-color: transparent;
+  background-image: none;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.results-character-img {
+  transform: scale(1.7);
+}
+
+#results-screen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(1.5rem);
+  -webkit-backdrop-filter: blur(5px);
+  filter: blur(1.5rem);
+  z-index: -1;
+}
+
+.result-title {
+  font-family: "Gamer Studio";
+  font-size: 74px;
+  color: #fff;
+}
+
+#results-character {
+  position: absolute;
+  left: 20%;
+  bottom: 5%;
+  transform: rotate(10deg) scale(1.5);
+  max-width: 1030.78px;
+  z-index: 5;
+}
+
+.result-container {
+  margin-left: 30%;
+}
+
+#score-display {
+  font-size: 90px;
+  margin: 10px 0 30px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  z-index: 10;
+  position: relative;
+}
+
+#score-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust as needed */
+    margin: 100px 0;
+}
+
+#discount {
+  color: #FBE30D;
+  font-size: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 1000;
+  margin: 100px 0;
+}
+
+.discount-percentage {
+    width: 100%; /* Ensures width consistency */
+    font-size: 150px;
+    text-align: center; /* Center text */
+}
+
+.discount-subtext {
+    width: 100%; /* Matches width of percentage */
+    text-align: center;
+}
+
+.form-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+#user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#submit-score {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#submit-score:hover:not(:disabled) {
+  transform: scale(1.05);
+  background-color: transparent;
+}
+
+#submit-score:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+
+#submit-score img {
+  max-width: 348px;
+  width: 100%;
+  max-height: 116px;
+  height: 100%;
+}
+
+#results-screen input {
+  padding: 27px 42px;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  width: 428px;
+  height: 88px;
+  margin: auto;
+  font-size: 25px;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+#results-screen input:focus {
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Полностью устраняем задний фон текста при автозаполнении в Chrome */
+#results-screen input:-webkit-autofill {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.6) !important;
+  transition: background-color 50000s ease-in-out 0s !important;
+  box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.08) inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.08) inset !important;
+  background-color: transparent !important;
+}
+
+/* Стили для автозаполнения при фокусе и наведении */
+#results-screen input:-webkit-autofill:hover,
+#results-screen input:-webkit-autofill:focus,
+#results-screen input:-webkit-autofill:active {
+  -webkit-text-fill-color: rgba(255, 255, 255, 1) !important;
+  box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.12) inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.12) inset !important;
+  background-color: transparent !important;
+}
+
+/* Firefox автозаполнение */
+#results-screen input:autofill {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.6) !important;
+  background-image: none !important;
+  box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.08) inset !important;
+}
+
+/* Для Microsoft Edge */
+#results-screen input:-ms-input-placeholder {
+  background-color: transparent !important;
+}
+
+/* Принудительное удаление фона за текстом во всех браузерах */
+#results-screen input:-internal-autofill-selected {
+  appearance: none !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* Более агрессивная перезапись с очень длительным переходом */
+@keyframes autofillFix {
+  to {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+#results-screen input {
+  animation-delay: 1s;
+  animation-name: autofillFix;
+  animation-fill-mode: both;
+  animation-duration: 50000s;
+}
+
+/* Предотвращение появления желтого фона в Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+}

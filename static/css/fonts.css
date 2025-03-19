@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Gamer Studio';
+  src: url('../fonts/gamer_station/GamerStation.ttf') format('truetype'),
+    url('../fonts/gamer_station/GamerStation.woff') format('woff');
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Gamer Studio';
+  src: url('../fonts/gamer_station/GamerStation.ttf') format('truetype'),
+    url('../fonts/gamer_station/GamerStation.woff') format('woff');
+  font-style: italic;
+  font-weight: 400;
+}

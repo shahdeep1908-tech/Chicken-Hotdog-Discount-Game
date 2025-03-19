@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('/static/assets/Asset-1@3x 1.png');
+  background-size: cover;
+  /* Изменено на cover для лучшей адаптивности */
+  background-position: center center;
+  /* Центрирование фона */
+  background-repeat: no-repeat;
+  background-color: #000;
+  background-attachment: fixed;
+  /* Предотвращает прокрутку фона */
+  transition: background-size 1.2s cubic-bezier(0.22, 0.61, 0.36, 1),
+  background-position 1.2s ease;
+  color: #333;
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  min-height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+}
+body.initial-state {
+  background-image: url('/static/assets/Asset-1@3x 1.png');
+  background-size: cover;
+  background-position: center bottom;
+}
+/* Медиа-запрос для устройств с большим экраном */
+@media (min-width: 1024px) {
+  body {
+    background-size: 120% auto;
+    /* Возвращаем приближенный вид для десктопа */
+    background-position: center bottom;
+  }
+}
+
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  pointer-events: auto;
+}
+
+.active {
+  display: flex;
+}
+
+h1 {
+  color: #FBE30D;
+  font-family: 'Gamer Studio';
+  font-size: 86.55px;
+  font-weight: 400;
+  max-width: 1222px;
+}
+
+/* Адаптивные стили для заголовка на мобильных устройствах */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 32px;
+    margin-top: 64px;
+    max-width: 90%;
+  }
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  opacity: 1;
+}
+
+button:hover:not([disabled]) {
+  background-color: transparent;
+  opacity: 1;
+}
+
+button:disabled {
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  opacity: 0.7;
+  cursor: default;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Media query for larger screens */
+@media (min-width: 1024px) {
+  body {
+    background-size: 120% auto;
+    /* Return to zoomed view for desktop */
+    background-position: center bottom;
+  }
+}
+
+/* Media query for mobile devices - prioritize height coverage */
+@media (max-width: 768px) {
+  body {
+    background-size: auto 150%;
+    /* Use height-based scaling to fill vertical space */
+    background-position: center center;
+  }
+}

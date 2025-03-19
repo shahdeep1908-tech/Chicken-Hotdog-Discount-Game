@@ -1,0 +1,167 @@
+#leaderboard-screen {
+  background-color: transparent;
+  background-image: none;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+#leaderboard-screen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(1.5rem);
+  -webkit-backdrop-filter: blur(5px);
+  filter: blur(1.5rem);
+  z-index: -1;
+}
+
+#leaderboard-screen.active {
+  display: flex;
+}
+
+#leaderboard-screen h2 {
+  display: none;
+  /* Скрываем заголовок, так как его нет на предоставленных изображениях */
+}
+
+.score-table {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 60px;
+  z-index: 10;
+  position: relative;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 80px;
+  /* Увеличиваем расстояние между таблицами */
+  width: 100%;
+}
+
+.score-row-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.score-row-table h3 {
+  margin-bottom: 20px;
+  font-size: 60px;
+  /* Увеличиваем размер заголовка */
+  color: #fff;
+  font-family: 'Gamer Studio', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+}
+
+.score-results-container {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.score-results-container img {
+  width: 100%;
+  max-width: 645px;
+  /* Делаем таблички шире */
+}
+
+.score-results-container p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 80px;
+  /* Увеличиваем размер цифр */
+  font-weight: bold;
+  color: #FFD700;
+  /* Яркий желтый цвет для цифр */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  font-family: 'Gamer Studio', sans-serif;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  z-index: 10;
+  position: relative;
+}
+
+#play-again {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#play-again:hover {
+  background-color: transparent;
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+#play-again img {
+  width: 348px;
+  height: 116px;
+}
+
+/* Медиа-запросы для мобильных устройств */
+@media (max-width: 768px) {
+  .score-row {
+    gap: 30px;
+  }
+
+  .score-row-table h3 {
+    font-size: 40px;
+  }
+
+  .score-results-container {
+    max-width: 300px;
+  }
+
+  .score-results-container p {
+    font-size: 60px;
+  }
+
+  #play-again img {
+    width: 250px;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .score-row {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .score-row-table h3 {
+    font-size: 30px;
+  }
+
+  .score-results-container {
+    max-width: 250px;
+  }
+
+  .score-results-container p {
+    font-size: 40px;
+  }
+}
