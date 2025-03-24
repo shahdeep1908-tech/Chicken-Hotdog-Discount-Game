@@ -29,26 +29,34 @@ function selectCharacter(element) {
 
 // Character throw animation function
 // Updated throwCharacter function with proper landing positions
-function throwCharacter(characterContainer, updateBackground, onComplete) {
+function throwCharacter(characterContainer, updateBackground, onComplete, deltaX) {
   isAnimating = true;
   backgroundUpdateApplied = false; // Reset background update flag
-
-  // Generate random distance from 100 to 1000 pixels
-  const distance = (Math.floor(Math.random() * 181) * 5) + 100;
-  const duration = 1200;
-
-  // Clear existing transform styles
-  characterContainer.style.transform = "";
 
   // Get screen dimensions
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
-  // Calculate final X position (center of screen)
-  const finalXPosition = viewportWidth / 2 - 50;
+  const maxDistance = 1000;  // Max possible distance
+  const minDistance = 100;   // Min possible distance
+  let minXPosition = 200;     // Min X position
+  const maxAllowedX = 900;
+  let maxXPosition = viewportWidth / 2 - 50; // Max X position
 
-  // Get current character position
-  const characterRect = characterContainer.getBoundingClientRect();
+  if (maxXPosition < minXPosition) {
+  maxXPosition = minXPosition + 10;
+}
+
+  // Generate random distance from 100 to 1000 pixels
+  // const distance = (Math.floor(Math.random() * 181) * 5) + 100;
+  // const distance = (Math.floor(Math.random() * 181) * 5) + 100;
+   const distance = Math.min(Math.max(deltaX, minDistance), maxDistance);
+  console.log("distance ::: ", distance);
+  console.log("maxXPosition ::: ", maxXPosition);
+  const duration = 1200;
+
+  // Clear existing transform styles
+  characterContainer.style.transform = "";
 
   // Use different landing positions based on device type and orientation
   let finalBottom;
@@ -56,22 +64,46 @@ function throwCharacter(characterContainer, updateBackground, onComplete) {
   if (window.innerWidth <= 480) {
     // Extra small screens
     finalBottom = viewportHeight * 0.15;
+    maxXPosition = window.innerWidth * 0.7;
   } else if (window.innerWidth <= 768) {
     // Mobile
     finalBottom = viewportHeight * 0.18;
+    maxXPosition = window.innerWidth * 0.7;
   } else if (window.innerHeight <= 450 && window.innerWidth <= 900) {
     // Landscape mobile orientation
     finalBottom = viewportHeight * 0.1;
+    maxXPosition = window.innerWidth * 0.7;
   } else {
     // Desktop
     finalBottom = viewportHeight * 0.22;
+    maxXPosition = window.innerWidth * 0.7;
   }
 
+  // Calculate final X position (center of screen)
+  const finalXPosition = Math.min(
+  ((distance - minDistance) / (maxDistance - minDistance)) * (maxXPosition - minXPosition) + minXPosition,
+  maxAllowedX // Clamp to max 1000
+);
+  console.log(`Distance: ${distance}, Final X Position: ${finalXPosition}`);
+
+  // Get current character position
+  const characterRect = characterContainer.getBoundingClientRect();
+
   // Apply transition for smooth animation
-  characterContainer.style.transition = `transform ${duration}ms cubic-bezier(0.32, 0.94, 0.60, 1), bottom ${duration}ms cubic-bezier(0.45, 0.05, 0.55, 0.95)`;
+  const minFlips = 0.5;
+  const maxFlips = 4;
+
+  // Calculate the number of flips dynamically based on distance
+  const flips = minFlips + ((distance - 100) / (1000 - 100)) * (maxFlips - minFlips);
+  console.log("flips ::: ", flips);
+  console.log("distance ::: ", distance);
+
+  // Ensure the final rotation is always a multiple of 360°
+  const rotationAngle = Math.round(flips) * 360;
+  characterContainer.style.transform = `translateX(${finalXPosition}px) rotate(${rotationAngle}deg)`;
 
   // Apply transformation
-  characterContainer.style.transform = `translateX(${finalXPosition}px) rotate(360deg)`;
+  //characterContainer.style.transform = `translateX(${finalXPosition}px) rotate(360deg)`;
   characterContainer.style.bottom = `${finalBottom}px`;
 
   // Remove game scale class and add flight class to reduce character size

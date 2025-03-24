@@ -37,6 +37,10 @@ let gameElements = {
   resultsCharacterContainer: null,
 };
 
+let startX = 0;
+let startY = 0;
+const minSwipeDistance = 30;
+
 // Flag to track whether background zoom has already been applied
 let backgroundLandingApplied = false;
 
@@ -114,6 +118,9 @@ function handleSwipeStart(e) {
 
   const isTouchEvent = e.type === "touchstart";
 
+  startX = isTouchEvent ? e.touches[0].clientX : e.clientX;
+  startY = isTouchEvent ? e.touches[0].clientY : e.clientY;
+
   // Show pointer near character
   showPointerNearCharacter(pointer, characterContainer);
 
@@ -125,17 +132,45 @@ function handleSwipeStart(e) {
 }
 
 // Handle swipe end
-function handleSwipeEnd() {
+function handleSwipeEnd(e) {
   if (getIsAnimating()) return;
 
   const { pointer, swipeInstruction, characterContainer } = gameElements;
+  const isTouchEvent = e.type === "touchend";
+
+  const endX = isTouchEvent ? e.changedTouches[0].clientX : e.clientX;
+  const endY = isTouchEvent ? e.changedTouches[0].clientY : e.clientY;
+
+  const deltaX = endX - startX;
+  const deltaY = endY - startY;
+  console.log("deltaX :::: ", deltaX);
+  console.log("deltaY :::: ", deltaY);
+
+  if (Math.abs(deltaX) > minSwipeDistance && deltaX > 0) {
+    console.log("Swipe forward detected! (Right Swipe)");
+    triggerThrow(characterContainer, deltaX);
+  } else if (Math.abs(deltaY) > minSwipeDistance && deltaY < 0) {
+    console.log("Swipe forward detected! (Up Swipe)");
+    triggerThrow(characterContainer, deltaX);
+  } else {
+    console.log("Invalid swipe, too short.");
+  }
 
   // Hide pointer and instruction
-  hidePointerAndInstruction(pointer, swipeInstruction);
+  //hidePointerAndInstruction(pointer, swipeInstruction);
 
   // Start throw animation
   // Pass updateBackground function, but it will be called only once during landing
-  throwCharacter(characterContainer, updateBackground, showResults);
+  //throwCharacter(characterContainer, updateBackground, showResults);
+}
+
+function triggerThrow(characterContainer, deltaX) {
+  const { pointer, swipeInstruction } = gameElements;
+
+  hidePointerAndInstruction(pointer, swipeInstruction);
+
+  // Start throw animation
+  throwCharacter(characterContainer, updateBackground, showResults, deltaX);
 }
 
 // Show results

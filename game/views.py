@@ -14,14 +14,15 @@ def game_view(request):
 
 def get_discount(request):
     """API to return discount based on distance"""
-    distance = request.GET.get("distance", None)
-    print(distance)
+    distance = request.GET.get("distance", 200)
 
     if distance is None:
         return JsonResponse({"error": "Distance parameter is required"}, status=400)
 
     try:
-        distance = int(distance)
+        distance = round(float(distance))
+        distance = int(float(distance))
+        print(distance)
         discount_rule = DiscountRule.objects.filter(
             min_distance__lte=distance, max_distance__gte=distance
         ).first()
