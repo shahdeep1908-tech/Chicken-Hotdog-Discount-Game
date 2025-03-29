@@ -67,7 +67,7 @@ let discount_received = 0;
 // Calculate discount based on distance
 async function calculateDiscount(distance) {
   try {
-    const response = await fetch(`/api/get-discount/?distance=${distance}`);
+    const response = await fetch(`/get-discount/?distance=${distance}`);
     const data = await response.json();
 
     if (data.discount) {
@@ -95,7 +95,7 @@ async function saveScore(playerName, playerEmail) {
   console.log(scoreData);
 
   try {
-    const response = await fetch("/api/save-score/", {
+    const response = await fetch("/claim-code/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(scoreData),
